@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Log in</h1>
+
+<form id="loginForm">
+    <input type="text" id="login" placeholder="Login" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Log in</button>
+</form>
+
+<p id="loginMessage" style="text-align:center; color:#2e7d32; font-weight:bold;"></p>
+
+<!-- Появляется после успешного входа -->
+<div id="afterLogin" style="text-align:center; display:none; margin-top:20px;">
+    <button onclick="window.location.href='/user_profile'">Go to your user profile</button>
+    <button onclick="window.location.href='/meal_plan'">Go to meal plan</button>
+</div>
+
+<p style="text-align:center;" id="signupTransfer">New here? <a href="/signup">Create an account</a></p>
+
+<script src="login.js"></script>
+</body>
+</html>

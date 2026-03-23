@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Sign Up</h1>
+
+<form id="registerForm" class="register-form">
+    <div class="form-row">
+        <label for="username">Public username:</label>
+        <input type="text" id="username" placeholder="At least 5 characters, letters/numbers/_" required>
+    </div>
+
+    <div class="form-row">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="example@domain.com" required>
+    </div>
+
+    <div class="form-row">
+        <label for="login">Login:</label>
+        <input type="text" id="login" placeholder="At least 5 characters, letters/numbers/_" required>
+    </div>
+
+    <div class="form-row password-block">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Min. 8 characters" required minlength="8">
+    </div>
+
+    <!-- 🔹 Conditions block -->
+    <div id="password-conditions">
+        <p>Password must contain:</p>
+        <ul>
+            <li id="length" class="invalid">At least 8 characters</li>
+            <li id="lowercase" class="invalid">A lowercase letter</li>
+            <li id="uppercase" class="invalid">An uppercase letter</li>
+            <li id="number" class="invalid">A number</li>
+        </ul>
+    </div>
+
+    <div class="form-row">
+        <label for="password_confirmation">Confirm password:</label>
+        <input type="password" id="password_confirmation" placeholder="Repeat password">
+    </div>
+
+    <button type="submit">Sign up</button>
+</form>
+
+<p id="registerMessage" class="register-message"></p>
+
+<!-- Появляется после успешного входа -->
+<div id="afterLogin" style="text-align:center; display:none; margin-top:20px;">
+    <button onclick="window.location.href='/user_profile'">Go to your user profile</button>
+    <button onclick="window.location.href='/meal_plan'">Go to meal plan</button>
+</div>
+
+<p class="login-link" id="loginTransfer">Already have an account? <a href="/login">Log in</a></p>
+
+<script src="auth.js"></script>
+</body>
+</html>

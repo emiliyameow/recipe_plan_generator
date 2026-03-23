@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal Plan Setup</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header id = "header1">
+    <div id = "authentificated-user-panel" class="user-panel" style="display:none">
+        <div id="userInfo" class="user-info" ></div>
+        <button  id="logoutBtn" class="logout-btn">Quit</button>
+    </div>
+    <div id = "un-authentificated-user-panel" class="user-panel">
+        <button id="loginBtnCorner" class="login-btn" onclick="window.location.href='/login'">Login</button>
+    </div>
+    <h1>Get my meal plan for today</h1>
+</header>
+
+<div id="infoForUnathorised" class="info-plan-limit-block" style="display: flex; text-align: center;  justify-content: center;align-items: center">
+    <h3>Welcome to SmartChef!</h3>
+    <p> </p>
+    <p>SmartChef is a service, where you can generate perfect menu based on <strong>calories calculations</strong> for a day, using your own preferences. </p>
+    
+    <p> You can choose: </p>
+    <div style = "text-align: center; margin-left: 100px; margin-right: 100px; padding: 5px">
+        <div class = "nutrition2">
+            <p><strong>Cuisines</strong> </p>
+            <p><strong>Intolerances</strong> </p>
+            <p><strong>Diet</strong> </p>
+            <p><strong>Time of meal preparation</strong> </p>
+        </div>
+    </div>
+    
+    <div style = "text-align: center; max-width: 200px" class="info-plan-limit-block" >
+        <p id="loginInfo" style="text-align: center">Log in to start!</p>
+        <p> </p>
+        <button class = "login-btn" id="loginBtnInForm" onclick="window.location.href='/login'">Log in</button>
+    </div>
+    
+</div>
+<div class="info-plan-limit-block" id = "generationRules" style="display : none">
+    <h3>Daily Plan Generation Rules</h3>
+
+    <p>
+        You can generate a meal plan <strong>only once per day</strong>.
+    </p>
+
+    <p>
+        If you have already generated a plan today, pressing the button will load
+        your <strong>previously generated plan</strong> using the exact preferences that were
+        used earlier today.
+    </p>
+
+    <p>
+        If you have <strong>not</strong> generated a plan today, the system will <strong>generate</strong> a
+        <strong>new plan based on your current settings</strong>.
+    </p>
+
+    <div class="plan-hint-box">
+        <p>
+            Tip: Review your preferences carefully before generating — they cannot be changed until tomorrow.
+        </p>
+    </div>
+</div>
+
+
+
+<form id="nutritionForm" class="register-form">
+    <h2>1. Determining your daily calorie intake </h2>
+
+    <div class="form-row">
+        <label><input type="radio" name="source" value="profile" checked> Use data from my profile (we recommend using this option)</label>
+        <label><input type="radio" name="source" value="manual"> Enter manually</label>
+        <!-- <label><input type="radio" name="source" value="none"> I do not count calories</label> -->
+    </div>
+
+    <div id="profileInfo" class="info-box">
+        <div id = "profileInfoBodyPanel" style = "display: none">
+            <p></p>
+            <div id = "profileInfoBody" class = "info-box"></div>
+            <p></p>
+            <button class = "login-btn" id="profileButton" onclick="window.location.href='/user_profile'">Change in Profile</button>
+        </div>
+    </div>
+    
+    <!-- === MANUAL INPUT === -->
+    <div id="manualInput" class="hidden">
+        
+        <h3>Manual Input Options</h3>
+
+        <p style="font-size: 15px; color:#555; text-align: left;"><strong>Choose input method:</strong></p>
+
+        <div class="form-row" style="margin-bottom: 10px;">
+            <label><input type="radio" name="manualType" value="calories" checked> Enter calories and goal</label>
+            <label><input type="radio" name="manualType" value="macronutrients"> Enter macronutrients (Protein/Fats/Carbs)</label>
+        </div>
+
+        <!-- Calories + Goal -->
+        <div id="manualCaloriesGoal">
+            <div class="form-row">
+                <label>Calories (kcal):</label>
+                <input type="number" id="manualCalories" placeholder="between 1200 and 4000">
+            </div>
+            <div class="form-row">
+                <label>Goal:</label>
+                <select id="manualGoal">
+                    <option value="">Select goal</option>
+                    <option value="WeightLoss">Weight Loss</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="WeightGain">Weight Gain</option>
+                    <option value="Recomposition">Recomposition</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Macronutrients -->
+        <div id="manualBju" class="hidden">
+            <p style="font-size: 14px; color:#e71111; text-align:left;">Use this ONLY if you are confident in your micronutrient calculations.</p>
+            <div class="form-row">
+                <label>Protein (g):</label>
+                <input type="number" id="manualProtein" placeholder="e.g. 140">
+            </div>
+            <div class="form-row">
+                <label>Fat (g):</label>
+                <input type="number" id="manualFats" placeholder="e.g. 60">
+            </div>
+            <div class="form-row">
+                <label>Carbs (g):</label>
+                <input type="number" id="manualCarbs" placeholder="e.g. 225">
+            </div>
+        </div>
+    </div>
+
+    <!-- === MEAL PREP TIME === -->
+    <!-- === MEAL PREP TIME === -->
+    <h2>2. Meal Preparation Time</h2>
+
+    <p style="font-size: 14px; color:#555; text-align:left;">
+        You can specify how many minutes you want to spend preparing meals:
+    </p>
+
+    <!-- Завтрак -->
+    <div class="form-row">
+        <label><input type="checkbox" id="useBreakfastTime"> Set breakfast time</label>
+    </div>
+    <div id="breakfastTimeBox" class="hidden form-row">
+        <label>Minutes:</label>
+        <input type="number" id="breakfastTime" placeholder="30">
+    </div>
+
+    <!-- Обед и ужин (одно время) -->
+    <div class="form-row">
+        <label><input type="checkbox" id="useLunchDinnerTime"> Set lunch/dinner time</label>
+    </div>
+    <div id="lunchDinnerTimeBox" class="hidden form-row">
+        <label>Minutes:</label>
+        <input type="number" id="lunchDinnerTime" placeholder="60">
+    </div>
+
+
+    <!-- === CUISINE / INTOLERANCES / DIET === -->
+    <h2>3. Preferences</h2>
+
+    <div class="form-row">
+        <label for="cuisine">Preferred cuisine (you should select at least 4):</label>
+        <select id="cuisine" multiple size="8">
+            <option>African</option><option>Asian</option><option>American</option>
+            <option>British</option><option>Cajun</option><option>Caribbean</option>
+            <option>Chinese</option><option>Eastern European</option><option>European</option>
+            <option>French</option><option>German</option><option>Greek</option>
+            <option>Indian</option><option>Irish</option><option>Italian</option>
+            <option>Japanese</option><option>Jewish</option><option>Korean</option>
+            <option>Latin American</option><option>Mediterranean</option><option>Mexican</option>
+            <option>Middle Eastern</option><option>Nordic</option><option>Southern</option>
+            <option>Spanish</option><option>Thai</option><option>Vietnamese</option>
+        </select>
+    </div>
+    <script>
+        document.getElementById('cuisine').addEventListener('mousedown', function(e) {
+            e.preventDefault(); // отменяем стандартное поведение
+            const option = e.target;
+
+            option.selected = !option.selected; // переключаем выбранность
+
+            this.dispatchEvent(new Event('change'));
+        });
+    </script>
+    <div class="form-row">
+        <label for="intolerances">Intolerances (you can select up to 4):</label>
+        <select id="intolerances" multiple size="6">
+            <option>Dairy</option><option>Egg</option><option>Gluten</option><option>Grain</option>
+            <option>Peanut</option><option>Seafood</option><option>Sesame</option><option>Shellfish</option>
+            <option>Soy</option><option>Sulfite</option><option>Tree Nut</option><option>Wheat</option>
+        </select>
+    </div>
+    <script>
+        document.getElementById('intolerances').addEventListener('mousedown', function(e) {
+            e.preventDefault(); // отменяем стандартное поведение
+            const option = e.target;
+
+            option.selected = !option.selected; // переключаем выбранность
+
+            // для браузеров, которые не обновляют UI автоматически
+            this.dispatchEvent(new Event('change'));
+        });
+    </script>
+
+    <div class="form-row">
+        <label for="diet">Diet (only one):</label>
+        <select id="diet">
+            <option value="">— No diet —</option>
+            <option>Gluten Free</option><option>Vegetarian</option><option>Lacto-Vegetarian</option>
+            <option>Ovo-Vegetarian</option><option>Vegan</option><option>Pescetarian</option>
+            <option>Paleo</option><option>Primal</option><option>Low FODMAP</option><option>Whole30</option>
+        </select>
+    </div>
+
+    <!-- === SUBMIT === -->
+    <button type="submit" class="plan-btn" id="submitPlanBtn">Calculate calories</button>
+    <p id="formMessage" class="register-message"></p>
+    <p id="caloriesMessage" class="register-message" style="display: none"></p>
+    
+    <div id="generate-area" style="display: none">
+        <div class="plan-hint-box-2">
+            <p>
+                Tip: Review your preferences carefully before generating — they cannot be changed until tomorrow.
+            </p>
+        </div>
+        <button type="submit" class="plan-btn" id="generatePlanBtn">Generate plan</button>
+        
+        
+        <p id ="generateNowOrPastMessage" style="color:#555; font-size:14px; margin-top:5px; display: none"></p>
+        
+        
+        <p id="planMessage" style="color:#555; font-size:14px; margin-top:5px;"></p>
+        <p id="messageAfterGeneration" style="color:#555; font-size:14px; margin-top:5px;"></p>
+        
+    </div>
+
+    
+    
+</form>
+
+<!-- Контейнер с рецептами -->
+<div id="recipesSection">
+
+    <h2 id="otherTitle" style="display:none;">Your meal plan for today</h2>
+    <h2 id="generationTime" style="display:none;">(generated before)</h2>
+    <div id="planNote" style="display:none;">
+        <strong>Note:</strong> You’ve already generated your plan for today.<br>
+        We’re showing your saved plan based on the preferences you used earlier.
+    </div>
+    <div id="otherRecipes" class="recipes-grid"></div>
+</div>
+
+<script src = "meal_plan.js"> </script>
+
+</body>
+</html>
+

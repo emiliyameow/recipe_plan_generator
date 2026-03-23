@@ -1,0 +1,806 @@
+/* ===== Общие стили ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9f4;
+    margin: 20px;
+    color: #2e2e2e;
+}
+
+h1, h2 {
+    color: #3a6b35;
+    text-align: center;
+}
+
+a {
+    color: #3a6b35;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Форма добавления рецепта ===== */
+form {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+input, textarea, select, button {
+    margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid #a3d2a1;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #66bb6a;
+}
+
+/* ===== Строка ингредиента ===== */
+.ingredient-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    max-width: 480px;
+    width: 100%;
+}
+
+.ingredient-input {
+    flex: 2;
+    min-width: 150px;
+}
+
+.ingredient-quantity {
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+}
+
+.ingredient-unit {
+    flex: 1;
+    min-width: 60px;
+}
+
+.ingredient-row button {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.ingredient-row button:hover {
+    background-color: #e57373;
+}
+
+/* ===== Переключатель публичности ===== */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 24px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* ===== Шапка ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 2px solid #a3d2a1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    /*padding: 20px 20px; /* увеличим отступ по высоте */
+    display: flex;
+    justify-content: center; /* центрируем заголовок */
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Заголовок по центру */
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #3a6b35;
+    text-align: center;
+}
+
+/* Панель пользователя слева */
+.user-panel {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%); /* центрирует панель по вертикали */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px; /* чуть больше расстояние между именем и кнопкой */
+}
+
+.user-info {
+    font-weight: bold;
+    color: #2a8f3a;
+    font-size: 16px;
+    cursor: pointer; 
+    transition: color 0.3s ease;
+}
+.user-info:hover {
+    color: #90b49a;
+}
+
+/* Кнопка "выйти" */
+.logout-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn {
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+/* Отступ под фиксированный header */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9f4;
+    margin: 0;
+    padding-top: 100px; /* подстраиваем под высоту хедера */
+    color: #2e2e2e;
+    text-align: center;
+}
+
+
+
+/* ===== Сетка рецептов ===== */
+.recipes-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* ===== Карточки рецептов ===== */
+.recipe-card {
+    background-color: #fff;
+    border: 2px solid #4caf50;
+    border-radius: 15px;
+    padding: 15px;
+    width: 250px;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.recipe-card:hover {
+    box-shadow: 0 0 10px #4caf50;
+}
+
+.recipe-card h3 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+.recipe-card p {
+    color: #4e4e4e;
+}
+
+.recipe-card ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.recipe-card button {
+    background-color: #a3d2a1;
+    color: #2e7d32;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.2s;
+}
+
+.recipe-card button:hover {
+    transform: scale(1.05);
+}
+
+.recipe-card .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.recipe-card .delete-btn:hover {
+    background-color: #e57373;
+}
+
+.author {
+    font-size: 14px;
+    color: #388e3c;
+    margin-bottom: 8px;
+}
+
+/* ===== Разделительная линия ===== */
+.divider {
+    display: none;
+    width: 100%;
+    height: 2px;
+    background-color: #a3d2a1;
+    margin: 100px 0;
+    box-shadow: 0 0 8px #a3d2a1;
+}
+
+#invisiblePanel {
+    visibility: hidden; /* панель невидима, но оставляет место */
+}
+
+/* Контейнер формы */
+.register-form {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 25px 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 550px;
+    width: 100%;
+}
+
+/* Каждая строка: метка + поле */
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 10px;
+    min-width: 500px;
+}
+
+.form-row label {
+    flex: 1;
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+    min-width: 160px;
+}
+
+.form-row input {
+    flex: 2;
+}
+
+/* Блок условий пароля */
+#password-conditions {
+    margin: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+#password-conditions p {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#password-conditions ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+#password-conditions li {
+    margin: 3px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+/* Значки рядом с условиями */
+#password-conditions li::before {
+    content: "✖";
+    position: absolute;
+    left: 0;
+    color: #d32f2f;
+}
+
+#password-conditions li.valid::before {
+    content: "✔";
+    color: #2e7d32;
+}
+
+#password-conditions li.valid {
+    color: #2e7d32;
+}
+
+#password-conditions li.invalid {
+    color: #d32f2f;
+}
+
+/* Сообщения */
+.register-message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Валидация полей */
+input.valid {
+    border: 2px solid #a3d2a1;
+}
+
+input.invalid {
+    border: 2px solid #ea8d8d;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== User Profile (Personal Cabinet) ===== */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.user-block, .body-info-block {
+    width: 100%;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Мягкие метки */
+.form-row label {
+    font-weight: normal;
+    color: #444;
+    text-align: left;
+}
+
+/* Вертикальное расположение label + input */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Заголовок */
+header {
+    justify-content: center !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+/* Валидация */
+input.valid {
+    border: 2px solid #4caf50 !important;
+}
+
+input.invalid {
+    border: 2px solid #f44336 !important;
+}
+
+/* Сообщения об ошибках */
+.register-message {
+    margin-top: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Кнопка сохранения */
+button {
+    background-color: #3a6b35;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #5aa34d;
+}
+
+.plan-btn {
+    background-color: #3a6b35;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.plan-btn:hover {
+    background-color: #66bb6a;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #ccc; /* серый фон */
+    color: #666;            /* цвет текста */
+    cursor: not-allowed;    /* курсор "запрещено" */
+    opacity: 0.7;           /* слегка прозрачный */
+}
+
+/* ===== Enhanced Recipe Cards FOR PLAN ===== */
+.enhanced-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* кнопка опускается вниз */
+    align-items: center;
+    text-align: left;
+    width: 280px;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid #a3d2a1;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+}
+
+.enhanced-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(58, 107, 53, 0.25);
+}
+
+.recipe-header {
+    background-color: #3a6b35;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.recipe-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 2px solid #a3d2a1;
+}
+
+.recipe-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between; /* выталкивает кнопку вниз */
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.recipe-title {
+    font-size: 18px;
+    color: #2e7d32;
+    margin: 10px 0 8px;
+    text-align: center;
+}
+
+.nutrition {
+    background-color: #f7f9f4;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.nutrition2 {
+    background-color: #f7f9f4;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.nutrition p {
+    margin: 4px 0;
+}
+.nutrition2 p {
+    margin: 4px 0;
+}
+
+.recipe-link {
+    display: block;
+    width: fit-content;
+    margin: 15px auto 0; /* центрирует по горизонтали */
+    text-align: center;
+    background-color: #3a6b35;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.recipe-link:hover {
+    background-color: #66bb6a;
+    transform: scale(1.05);
+}
+
+
+.enhanced-card .recipe-header h3 {
+    color: #ffffff;
+}
+
+/* ===== Daily Summary Block ===== */
+.daily-summary {
+    background-color: #fff;
+    border: 2px solid #4caf50;
+    border-radius: 20px;
+    padding: 20px 25px;
+    max-width: 400px;
+    margin: 30px auto 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.daily-summary h3 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+.daily-summary p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #4e4e4e;
+    font-weight: 600;
+}
+
+/* ===== Deviation Block (Absolute %) ===== */
+/* ===== Deviation Block with Progress Bars ===== */
+#deviationBlock {
+    background-color: #fff;
+    border: 2px solid #a3d2a1;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+#deviationBlock h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #3a6b35;
+}
+
+.deviation-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.deviation-item span:first-child {
+    width: 70px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    min-width: 50px; /* чтобы не сжималась */
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 8px 0 0 8px;
+    transition: width 0.4s ease;
+}
+
+.deviation-item span:last-child {
+    width: 40px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* ===== User Plan Info Block ===== */
+.info-plan-limit-block {
+    background: #ffffff;
+    border: 2px solid #a3d2a1;
+    border-radius: 20px;
+    padding: 20px 25px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-size: 15px;
+    line-height: 1.5;
+    color: #3a3a3a;
+}
+
+.info-plan-limit-block h3 {
+    text-align: center;
+    color: #2e7d32;
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.info-plan-limit-block p {
+    margin: 10px 0;
+    font-weight: 500;
+}
+#infoForUnathorised {
+    
+}
+
+#infoForUnathorised p {
+    margin: 10px 0;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Highlight hint area */
+.plan-hint-box {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background-color: #f7f9f4;
+    border-left: 4px solid #4caf50;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.plan-hint-box-2 {
+    padding: 12px 15px;
+    background-color: #f7f9f4;
+    text-align: left;
+    border-left: 4px solid #e71111;
+    border-radius: 12px;
+    font-size: 14px;
+    max-width: 600px;
+    margin: 15px auto;
+}
+
+/* ===== Plan Already Generated Note ===== */
+#planNote {
+    background-color: #fff; /* белый фон */
+    border: 2px solid #a3d2a1; /* мягкая рамка, как у карточек */
+    border-radius: 20px;
+    padding: 15px 20px;
+    max-width: 500px;
+    margin: 15px auto; /* центрируем по горизонтали с отступом сверху */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    font-size: 15px;
+    color: #3a3a3a;
+    line-height: 1.5;
+}
+
+#planNote strong {
+    color: #2e7d32; /* зелёный акцент на "Note:" */
+    font-weight: 600;
+}
+
+#planNote br {
+    margin-bottom: 5px;
+}
+
+.userInfo {
+    cursor: pointer;
+    text-decoration: underline;
+}
